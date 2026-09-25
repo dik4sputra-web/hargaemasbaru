@@ -16,12 +16,24 @@
 
 * { box-sizing: border-box; }
 
+html {
+  overflow-x: hidden;
+}
+
 html, body {
   font-family: var(--font-body);
   background: #07060f;
   color: #f0eeff;
   -webkit-font-smoothing: antialiased;
   margin: 0; padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+#root {
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* Mesh gradient background */
@@ -114,6 +126,10 @@ main, header, footer { position: relative; z-index: 1; }
 .trow:hover { background: rgba(255,255,255,0.04); }
 
 /* Ticker marquee */
+.ticker-wrap {
+  overflow: hidden;
+  width: 100%;
+}
 .ticker-track {
   display: flex;
   width: max-content;
@@ -142,13 +158,11 @@ main, header, footer { position: relative; z-index: 1; }
 
 /* ── Mobile compact ── */
 @media (max-width: 640px) {
-  /* Tab nav: bleed to screen edges so scroll works fully */
+  /* Tab nav: scroll horizontally, no bleed to avoid overflow */
   .tab-nav {
-    margin-left: -8px !important;
-    margin-right: -8px !important;
-    padding-left: 8px !important;
-    padding-right: 8px !important;
     margin-bottom: 16px !important;
+    padding-left: 2px !important;
+    padding-right: 2px !important;
   }
 
   /* Slightly smaller base */
