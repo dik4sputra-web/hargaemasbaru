@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Mono:wght@400;500&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  --color-gold: #F5C842;
+  --color-gold-dim: #c9971e;
+  --color-violet: #a78bfa;
+  --color-violet-dim: #7c3aed;
+  --color-emerald: #34d399;
+  --color-rose: #fb7185;
+  --color-sky: #38bdf8;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  font-family: var(--font-body);
+  background: #07060f;
+  color: #f0eeff;
+  -webkit-font-smoothing: antialiased;
+  margin: 0; padding: 0;
+}
+
+/* Mesh gradient background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 0%, rgba(124,58,237,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 10%, rgba(245,200,66,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(167,139,250,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+main, header, footer { position: relative; z-index: 1; }
+
+/* Glass card */
+.glass {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.glass-hover {
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.glass-hover:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(245,200,66,0.25);
+  box-shadow: 0 0 32px rgba(245,200,66,0.08);
+}
+
+/* Gradient text */
+.grad-gold {
+  background: linear-gradient(135deg, #F5C842 0%, #fde68a 45%, #c9971e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.grad-violet {
+  background: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.up   { color: #34d399; }
+.down { color: #fb7185; }
+
+/* Pill badge */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  letter-spacing: 0.3px;
+}
+.pill-up   { background: rgba(52,211,153,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.25); }
+.pill-down { background: rgba(251,113,133,0.15); color: #fb7185; border: 1px solid rgba(251,113,133,0.25); }
+.pill-neutral { background: rgba(167,139,250,0.12); color: #a78bfa; border: 1px solid rgba(167,139,250,0.2); }
+
+/* Neon glow line */
+.neon-top {
+  position: relative;
+  overflow: hidden;
+}
+.neon-top::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245,200,66,0.8), transparent);
+}
+
+/* Tabs */
+.tab-active {
+  background: linear-gradient(135deg, rgba(245,200,66,0.2), rgba(167,139,250,0.15));
+  border-color: rgba(245,200,66,0.4) !important;
+  color: #F5C842 !important;
+}
+
+/* Table row hover */
+.trow { transition: background 0.15s; }
+.trow:hover { background: rgba(255,255,255,0.04); }
+
+/* Ticker marquee */
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 80s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Live pulse dot */
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
+
+/* Hide scrollbar but keep scroll functionality */
+.hide-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+
+/* ── Mobile compact ── */
+@media (max-width: 640px) {
+  /* Tab nav: bleed to screen edges so scroll works fully */
+  .tab-nav {
+    margin-left: -8px !important;
+    margin-right: -8px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    margin-bottom: 16px !important;
+  }
+
+  /* Slightly smaller base */
+  html { font-size: 13px; }
+
+  /* All glass cards: tight padding */
+  .glass { padding: 12px !important; border-radius: 14px !important; }
+
+  /* Ticker smaller */
+  .ticker-track { font-size: 9px !important; }
+
+  /* Table */
+  table td, table th { padding: 5px 6px !important; font-size: 10px !important; }
+
+  /* Pill badges */
+  .pill { font-size: 9px !important; padding: 2px 7px !important; }
+
+  /* Dealer cards grid → 1 col */
+  .grid.md\:grid-cols-2.xl\:grid-cols-3 { grid-template-columns: 1fr !important; }
+}
+
+/* Spread bar */
+.spread-track { height: 4px; background: rgba(255,255,255,0.06); border-radius: 99px; overflow: hidden; }
+.spread-fill  { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #fb718540, #fb7185); }
+
+/* Stat change card */
+.change-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.2s;
+}
+.change-card:hover { border-color: rgba(167,139,250,0.3); }
