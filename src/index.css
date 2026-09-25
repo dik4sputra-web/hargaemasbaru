@@ -184,6 +184,13 @@ main, header, footer { position: relative; z-index: 1; }
   .grid.md\:grid-cols-2.xl\:grid-cols-3 { grid-template-columns: 1fr !important; }
 }
 
+/* Chart touch fix — prevent page scroll when touching charts on mobile */
+.chart-touch {
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 /* Spread bar */
 .spread-track { height: 4px; background: rgba(255,255,255,0.06); border-radius: 99px; overflow: hidden; }
 .spread-fill  { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #fb718540, #fb7185); }
